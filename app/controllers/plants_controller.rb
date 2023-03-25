@@ -1,4 +1,5 @@
 class PlantsController < ApplicationController
+  wrap_parameters format: []
 
   # GET /plants
   def index
@@ -16,6 +17,18 @@ class PlantsController < ApplicationController
   def create
     plant = Plant.create(plant_params)
     render json: plant, status: :created
+  end
+
+  def update
+    plant = Plant.find(params[:id])
+    plant.update(plant_params)
+    render json: plant, status: :accepted
+  end
+
+  def destroy
+    plant = Plant.find(params[:id])
+    plant.destroy
+    render json: {}, status: :no_content
   end
 
   private
